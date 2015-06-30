@@ -12,6 +12,7 @@ public class ThreeButtons extends MouseAdapter implements ActionListener{
 	JButton button3 = new JButton("ERRAR!");
 	
 	public boolean shape;
+	public boolean shape1=false;
 	
 	int counter1=0;
 	
@@ -48,12 +49,13 @@ public class ThreeButtons extends MouseAdapter implements ActionListener{
 			shape = true;
 			frame.repaint();
 		}
-		if (e.getSource()==button2){
+		else if (e.getSource()==button2){
 			try{
 				int x=8/0;
 			}
 			catch(Exception ex){
-				System.exit(0);
+				shape1=true;
+				frame.repaint();
 			}
 			
 		}
@@ -79,7 +81,11 @@ public class ThreeButtons extends MouseAdapter implements ActionListener{
 				}
 			else if (shape==false){
 				g.fillRect(x,y,d1,d1);
-				}
+				}	
+			if (shape1==true){
+				g.setColor(Color.BLACK);
+				g.fillRect(30,30,600,600);
+			}
 		}
 	}
 }
