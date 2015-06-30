@@ -1,18 +1,18 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
-import javax.sound.midi.*;
+import javax.swing.event.*;
 
 
-public class ThreeButtons implements ActionListener{
+public class ThreeButtons extends MouseAdapter implements ActionListener{
 	JFrame frame = new JFrame("Exercicio de JFrame");
 	JButton button1 = new JButton("Ana");
 	JButton button2 = new JButton("Braga");
 	JButton button3 = new JButton("ERRAR!");
 	
+	public boolean shape;
+	
 	int counter1=0;
-	int counter2=0;
-	int counter3=0;
 	
 	public static void main (String[] args){
 		ThreeButtons gui = new ThreeButtons();
@@ -28,7 +28,7 @@ public class ThreeButtons implements ActionListener{
 		frame.getContentPane().add(BorderLayout.CENTER,drawPanel);
 		frame.getContentPane().add(BorderLayout.EAST,button2);
 		frame.getContentPane().add(BorderLayout.WEST,button1);
-		frame.getContentPane().add(BorderLayout.CENTER,button3);
+		frame.getContentPane().add(BorderLayout.NORTH,button3);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		button1.addActionListener(this);
@@ -38,15 +38,17 @@ public class ThreeButtons implements ActionListener{
 	public 	void actionPerformed(ActionEvent e){
 		
 		if(e.getSource() == button1){
-			counter1++;			
+			shape = false;
+			frame.repaint();
+			counter1++;
 		}
-		else if(e.getSource() == button2){
-			counter2++;
-		}
-		else if(e.getSource()==button3){
-			counter3++;
+		if(counter1>1){
+			shape = true;
+			frame.repaint();
 		}
 	}
+	
+
 	class MyDrawPanel extends JPanel{
 		public void paintComponent(Graphics g){
 	
@@ -60,6 +62,13 @@ public class ThreeButtons implements ActionListener{
 
 			Color randomColor = new Color (red,green,blue,100);
 			g.setColor(randomColor);
-	}
+			
+			if (shape==true){
+				g.fillOval(x,y,d1,d1);
+				}
+			else if (shape==false){
+				g.fillRect(x,y,d1,d1);
+				}
+		}
 	}
 }
