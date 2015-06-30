@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.event.*;
+import javax.sound.midi.*;
 
 
 public class ThreeButtons extends MouseAdapter implements ActionListener{
@@ -13,6 +14,7 @@ public class ThreeButtons extends MouseAdapter implements ActionListener{
 	public boolean shape;
 	
 	int counter1=0;
+	
 	
 	public static void main (String[] args){
 		ThreeButtons gui = new ThreeButtons();
@@ -45,6 +47,15 @@ public class ThreeButtons extends MouseAdapter implements ActionListener{
 		if(counter1>1){
 			shape = true;
 			frame.repaint();
+		}
+		if (e.getSource()==button2){
+			try{
+				int x=8/0;
+			}
+			catch(Exception ex){
+				System.exit(0);
+			}
+			
 		}
 	}
 	
